@@ -4,7 +4,7 @@ require './lib/user'
 require './database_connection_setup'
 require './lib/spaces'
 
-class BnB < Sinatra::Base
+class MakersBnB < Sinatra::Base
   enable :sessions
   register Sinatra::Flash
   configure do
@@ -14,11 +14,15 @@ class BnB < Sinatra::Base
     set :root         , File.dirname(__FILE__)
   end
 
-  get '/' do
-    erb(:"user/new")
+  before do
+    @user = session[:user]
   end
 
-  post '/users' do
+  get '/' do
+    erb :"user/new"
+  end
+
+  post '/user/new' do
     user = User.create(name: params[:name], email: params[:email], password: params[:password])
     if user
       session[:user_id] = user.id
@@ -31,11 +35,11 @@ class BnB < Sinatra::Base
 
   post '/spaces/available' do
     session[:available] = Space.available(from_date: params[:from], to_date: params[:to])
-    redirect('/spaces')
+    redirect '/spaces'
   end
 
   get '/spaces/new' do
-    erb(:'spaces/new')
+    erb :'spaces/new'
   end
 
   post '/spaces' do
@@ -46,7 +50,7 @@ class BnB < Sinatra::Base
       from_date: params[:from],
       to_date: params[:to]
     )
-    redirect('/spaces')
+    redirect '/spaces'
   end
 
   get '/spaces' do
@@ -56,11 +60,11 @@ class BnB < Sinatra::Base
     else
       @spaces = session[:available]
     end
-    erb(:'spaces/list')
+    erb :'spaces/list'
   end
 
   get '/sessions/new' do
-    erb(:'sessions/new')
+    erb :'sessions/new'
   end
 
   post '/sessions' do
@@ -68,17 +72,17 @@ class BnB < Sinatra::Base
 
     if user
       session[:user_id] = user.id
-      redirect('/spaces')
+      redirect '/spaces'
     else
       flash[:notice] = 'Please check your email or password.'
-      redirect('/sessions/new')
+      redirect '/sessions/new'
     end
   end
 
   post '/sessions/destroy' do
     session.clear
     flash[:notice] = 'You have signed out.'
-    redirect('/spaces')
+    redirect '/spaces'
   end
 
   get '/spaces/booking' do

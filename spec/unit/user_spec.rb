@@ -35,16 +35,16 @@ describe User do
     end
 
     it 'returns a user given a correct email and password, if one exists' do
-      user = User.create(name: 'Tester', email: 'jim@gmail.com', password: 'password1234')
-      authenticated_user = User.authenticate(email: 'jim@gmail.com', password: 'password1234')
+      user = User.create(name: 'Tester', email: 'test2@gmail.com', password: 'password1234')
+      authenticated_user = User.authenticate(email: 'test2@gmail.com', password: 'password1234')
 
       expect(authenticated_user.id).to eq user.id
     end
 
     it 'returns nil given a wrong password' do
-      user = User.create(name: 'Tester', email: 'test@gmail.com', password: 'password1234')
+      user = User.create(name: 'Tester', email: 'test3@gmail.com', password: 'password1234')
 
-      expect(User.authenticate(email: 'test@example.com', password: 'password0000')).to be_nil
+      expect(User.authenticate(email: 'test3@example.com', password: 'password0000')).to be_nil
     end
   end
 end
