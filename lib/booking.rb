@@ -2,28 +2,26 @@ require_relative 'database_connection'
 
 class Booking
 
-  attr_reader :id, :user_id, :space_id, :space_name, :total_price, :booking_date, :booked
+  attr_reader :id, :space_name, :booking_date, :total_price, :name, :email
 
-  def initialize(id:, user_id:, space_id:, space_name:, total_price:, booking_date:, booked: false)
+  def initialize(id:, space_name:, booking_date:, total_price:, name:, email:)
     @id = id
-    @user_id = user_id
-    @space_id = space_id
     @space_name = space_name
-    @total_price = total_price
     @booking_date = booking_date
-    @booked = booked
+    @total_price = total_price
+    @name = name
+    @email = email
   end
 
-  def self.create(booking_date:, booked:, space_id:, user_id:, space_name:, total_price:)
+  def self.create(space_name:, booking_date:, total_price:, name:, email:)
     booking = DatabaseConnection.query(
-      "INSERT INTO bookings (booking_date, booked, space_id, user_id, space_name, total_price)
-       VALUES ('#{booking_date}', '#{booked}', #{space_id}, '#{user_id}', '#{space_name}', '#{total_price}')
-       RETURNING id, booking_date, booked, space_id, user_id, space_name, total_price;")
+      "INSERT INTO bookings(space_name, booking_date, total_price, name, email)
+       VALUES ('#{space_name}', '#{booking_date}', '#{total_price}', '#{name}', '#{email}')
+       RETURNING id, space_name, booking_date, total_price, name, email;")
 
    Booking.new(
-     id: booking[0]['id'], booking_date: booking[0]['booking_date'],
-     booked: booking[0]['booked'], space_id: booking[0]['space_id'],
-     user_id: booking[0]['user_id'], space_name: booking[0]['space_name'],
-     total_price: booking[0]['total_price'])
+     id: booking[0]['id'], space_name: booking[0]['space_name'],
+     booking_date: booking[0]['booking_date'], total_price: booking[0]['total_price'],
+     name: booking[0]['name'], email: booking[0]['email'])
   end
 end
