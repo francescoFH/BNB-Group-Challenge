@@ -47,4 +47,12 @@ describe User do
       expect(User.authenticate(email: 'test3@example.com', password: 'password0000')).to be_nil
     end
   end
+
+  describe '.request' do
+    it 'shows the requests for the owner' do
+      user = User.create(name: 'Tester', email: 'test3@gmail.com', password: 'password1234')
+      user.book('test')
+      expect(user.request).to eq 'test'
+    end
+  end
 end

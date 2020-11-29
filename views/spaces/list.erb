@@ -27,11 +27,10 @@
 <br>
 <li>Available from: <%= space.from_date%> to: <%= space.to_date%></li>
 <br>
-<form action="/spaces/booking">
+<form action="spaces/<%= space.id %>/booking" method="GET">
 <input type="submit" value="Book" />
 </form>
  <%end%>
-<br>
 <br>
 <br>
 <br>
@@ -41,13 +40,20 @@
 </form>
 <br>
 <br>
+<form action="/requests" method="get">
+<input type="submit" value="Requests" />
+</form>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
 <form action="/sessions/destroy" method="post">
 <input type="submit" value="Sign out" />
 </form>
-
+<br>
+<br>
 <!-- <footer>
  Makers BnB | FAMM team | Makers 2020
 </footer> -->

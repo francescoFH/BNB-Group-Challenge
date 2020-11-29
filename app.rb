@@ -2,7 +2,7 @@ require 'sinatra/base'
 require 'sinatra/flash'
 require './lib/user'
 require './database_connection_setup'
-require './lib/spaces'
+require './lib/space'
 
 class MakersBnB < Sinatra::Base
   enable :sessions
@@ -85,18 +85,19 @@ class MakersBnB < Sinatra::Base
     redirect '/spaces'
   end
 
-  get '/spaces/booking' do
-    erb :'booking/booking'
+  get '/spaces/:id/booking' do
+    p "test"
+    p params
+    @space_id = params[:id]
+    erb :'booking/new'
   end
 
   post '/spaces/booking' do
-    $check_in = params[:from]
-    $check_out = params[:to]
-    redirect '/spaces/booking/confirm'
+    redirect '/spaces'
   end
 
-  get '/spaces/booking/confirm' do
-    erb :'booking/confirm'
+  get '/requests' do
+    erb :requests
   end
 
   run! if app_file == $0

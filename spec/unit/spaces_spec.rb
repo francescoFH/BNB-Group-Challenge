@@ -1,4 +1,4 @@
-require 'spaces'
+require 'space'
 
 describe Space do
 

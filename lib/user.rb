@@ -3,12 +3,13 @@ require 'bcrypt'
 
 class User
 
-  attr_reader :id, :name, :email
+  attr_reader :id, :name, :email, :requests
 
   def initialize(id:, name:, email:)
     @id = id
     @name = name
     @email = email
+    @requests = []
   end
 
   def self.create(name:, email:, password:)
@@ -55,4 +56,7 @@ class User
     User.new(id: result[0]['id'], name: result[0]['name'], email: result[0]['email'])
   end
 
+  def book_request(request)
+    @requests << request
+  end
 end
