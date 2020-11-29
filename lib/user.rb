@@ -3,11 +3,12 @@ require 'bcrypt'
 
 class User
 
-  attr_reader :id, :name
+  attr_reader :id, :name, :email
 
-  def initialize(id:, name:)
+  def initialize(id:, name:, email:)
     @id = id
     @name = name
+    @email = email
   end
 
   def self.create(name:, email:, password:)
@@ -25,7 +26,7 @@ class User
        VALUES('#{name}', '#{email}', '#{encrypted_password}')
        RETURNING id, name;"
       )
-    User.new(id: user[0]['id'], name: user[0]['name'])
+    User.new(id: user[0]['id'], name: user[0]['name'], email: user[0]['email'])
   end
 
   def self.find(id:)
@@ -37,7 +38,7 @@ class User
        WHERE id = #{id};"
       )
 
-    User.new(id: search[0]['id'], name: search[0]['name'])
+    User.new(id: search[0]['id'], name: search[0]['name'], email: search[0]['email'])
   end
 
   def self.authenticate(email:, password:)
@@ -51,7 +52,7 @@ class User
 
     return unless BCrypt::Password.new(result[0]['password']) == password
 
-    User.new(id: result[0]['id'], name: result[0]['name'])
+    User.new(id: result[0]['id'], name: result[0]['name'], email: result[0]['email'])
   end
 
 end

@@ -4,12 +4,14 @@ describe Space do
 
   describe '.create' do
     it 'creates a new space' do
-      space = Space.create(name: 'Cosy cabin', user_id: '1',
+      owner = User.create(name: 'Tester', email: 'test@gmail.com', password: 'password1234')
+
+      space = Space.create(owner: owner.id, name: 'Cosy cabin',
         description: 'Escape to the countryside and relax by a log fire',
-        price: '100', from_date: '2020-12-19', to_date: '2021-01-03')
+        price: 100, from_date: '2020-12-19', to_date: '2021-01-03')
 
       expect(space.name).to eq 'Cosy cabin'
-      expect(space.user_id).to eq '1'
+      expect(space.owner).to eq owner.id
       expect(space.description).to eq 'Escape to the countryside and relax by a log fire'
       expect(space.price).to eq '100'
       expect(space.from_date).to eq '2020-12-19'
@@ -19,10 +21,12 @@ describe Space do
 
   describe '.all' do
     it 'lists all the spaces' do
-      space = Space.create(name: 'Cosy cabin', user_id: '1',
+      owner = User.create(name: 'Tester', email: 'test@gmail.com', password: 'password1234')
+
+      space = Space.create(owner: owner.id, name: 'Cosy cabin',
         description: 'Escape to the countryside and relax by a log fire',
         price: 100, from_date: '2020-12-19', to_date: '2021-01-03')
-      Space.create(name: 'London loft', user_id: '2',
+      Space.create(owner: owner.id, name: 'London loft',
         description: 'Live la vida loca',
         price: 200, from_date: '2021-01-29', to_date: '2021-02-03')
 
@@ -38,15 +42,17 @@ describe Space do
 
   describe '.available' do
     it 'gives available spaces' do
-      house = Space.create(name: 'Some house', user_id: '5',
+      owner = User.create(name: 'Tester', email: 'test@gmail.com', password: 'password1234')
+
+      house = Space.create(owner: owner.id, name: 'Some house',
         description: 'Some house somewhere',
         price: 100, from_date: '2020-12-25', to_date: '2020-12-31')
 
-      house1 = Space.create(name: 'Some house1', user_id: '6',
+      house1 = Space.create(owner: owner.id, name: 'Some house1',
         description: 'Some house somewhere',
         price: 100, from_date: '2020-12-20', to_date: '2020-12-29')
 
-      house2 = Space.create(name: 'Some house2', user_id: '7',
+      house2 = Space.create(owner: owner.id, name: 'Some house2',
         description: 'Some house somewhere',
         price: 100, from_date: '2020-12-18', to_date: '2020-12-22')
 

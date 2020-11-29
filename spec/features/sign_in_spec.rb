@@ -1,9 +1,10 @@
 feature 'Sign in' do
   scenario 'As a user, I want to sign-in for MakersBnB' do
-    User.create(name: 'Tester', email: 'test@gmail.com', password: '12345')
+    User.create(name: 'Mr Test', email: 'testme@gmail.com', password: '12345')
+    # sign_up
     sign_in
 
-    expect(page).to have_content 'Welcome to MakersBNB, Tester!'
+    expect(page).to have_content 'Welcome to MakersBNB, Mr Test!'
   end
 
   scenario 'User sees error if they get their email wrong' do
@@ -31,7 +32,8 @@ feature 'Sign in' do
   end
 
   scenario 'User can sign out' do
-    User.create(name: 'Tester', email: 'test@gmail.com', password: 'password1234')
+    # User.create(name: 'Tester', email: 'test@gmail.com', password: 'password1234')
+    sign_up
     sign_in
     click_button 'Sign out'
 

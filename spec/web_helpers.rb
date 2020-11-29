@@ -1,4 +1,4 @@
-def sign_up (name: 'Tester', email: 'test@mail.com', password: '12345', password_confirmation: '12345')
+def sign_up (name: 'Mr Test', email: 'testme@mail.com', password: '12345', password_confirmation: '12345')
   visit '/'
   fill_in 'name', with: name
   fill_in 'email', with: email
@@ -7,7 +7,7 @@ def sign_up (name: 'Tester', email: 'test@mail.com', password: '12345', password
   click_button 'Sign up'
 end
 
-def sign_in(email: 'test@gmail.com', password: '12345')
+def sign_in(email: 'testme@gmail.com', password: '12345')
     visit '/sessions/new'
     fill_in 'email', with: email
     fill_in 'password', with: password
