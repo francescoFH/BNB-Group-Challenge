@@ -16,11 +16,11 @@ input[type=submit] {
 }
 
 footer {
-     background-color: #95A5A6(21, 32, 43);
-     text-align: center;
-     padding: 10px;
-     font-family: monospace;
-     position: absolute;
-     bottom: 0;
-     width: 88.5%;
-   }
+  background-color: #95A5A6(21, 32, 43);
+  text-align: center;
+  padding: 10px;
+  font-family: monospace;
+  position: fixed;
+  bottom: 0;
+  width: 88.5%;
+}

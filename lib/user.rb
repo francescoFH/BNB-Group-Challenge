@@ -9,7 +9,13 @@ class User
     @id = id
     @name = name
     @email = email
-    @requests = []
+    @requests = [
+      {
+        "test" => "House_test",
+        "name" => "Mr Test",
+        "email" => "test@email.com"
+      }
+    ]
   end
 
   def self.create(name:, email:, password:)
@@ -56,7 +62,7 @@ class User
     User.new(id: result[0]['id'], name: result[0]['name'], email: result[0]['email'])
   end
 
-  def book_request(request)
+  def book(request)
     @requests << request
   end
 end

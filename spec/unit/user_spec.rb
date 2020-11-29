@@ -50,9 +50,9 @@ describe User do
 
   describe '.request' do
     it 'shows the requests for the owner' do
-      user = User.create(name: 'Tester', email: 'test3@gmail.com', password: 'password1234')
+      user = User.create(name: 'Tester', email: 'testing@gmail.com', password: 'password1234')
       user.book('test')
-      expect(user.request).to eq 'test'
+      expect(user.requests.length).to eq 2
     end
   end
 end

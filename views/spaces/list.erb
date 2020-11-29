@@ -7,19 +7,18 @@
 <% if @user %>
 <h2>Welcome to MakersBNB, <%= @user.name%>!</h2>
 <% end %>
-
+<br>
+<br>
 <h1>Book a space</h1>
-
+<br>
 <form action="/spaces/available" method="post">
 <label for="available-from">Available from</label><br>
   <input type="date" name="from" /><br><br>
 <label for="available-to">Available to</label><br>
-<input type="date" name="to" />
-  <br><br>
-<input type="submit" value="See spaces" />
-<br><br>
+<input type="date" name="to" /><br><br>
+<input type="submit" value="See spaces" /><br><br>
 </form>
-
+<br>
 <% @spaces.each do |space| %>
 <h2><%= space.name %></h2>
 <h3><%= space.description %></h3>
@@ -54,6 +53,6 @@
 </form>
 <br>
 <br>
-<!-- <footer>
+<footer class="footer">
  Makers BnB | FAMM team | Makers 2020
-</footer> -->
+</footer>

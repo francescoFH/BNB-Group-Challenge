@@ -86,8 +86,6 @@ class MakersBnB < Sinatra::Base
   end
 
   get '/spaces/:id/booking' do
-    p "test"
-    p params
     @space_id = params[:id]
     erb :'booking/new'
   end

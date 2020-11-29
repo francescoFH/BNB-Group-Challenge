@@ -2,6 +2,16 @@
 
 <h1>Requests</h1>
 
+<ul >
+  <% @user.requests.each do |request|%>
+    <div  >
+      <h3  ><%= request['house'] %> from <%= request['name'] %> email: <%= request['email'] %> </h3>
+      <a href="">Confirm</a>
+      <a href="">Deny</a>
+    </div>
+  <%end%>
+</ul>
+
 <footer>
  Makers BnB | FAMM team | Makers 2020
 </footer>
