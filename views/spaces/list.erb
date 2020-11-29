@@ -11,9 +11,9 @@
 <h1>Book a space</h1>
 
 <form action="/spaces/available" method="post">
-Available from<br>
+<label for="available-from">Available from</label><br>
   <input type="date" name="from" /><br><br>
-Available to<br>
+<label for="available-to">Available to</label><br>
 <input type="date" name="to" />
   <br><br>
 <input type="submit" value="See spaces" />
@@ -22,7 +22,7 @@ Available to<br>
 
 <% @spaces.each do |space| %>
 <h2><%= space.name %></h2>
-<p><%= space.description %></p>
+<h3><%= space.description %></h3>
 <li>Cost: £<%= space.price%> per night</li>
 <br>
 <li>Available from: <%= space.from_date%> to: <%= space.to_date%></li>

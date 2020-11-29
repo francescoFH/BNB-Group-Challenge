@@ -44,21 +44,21 @@ describe Space do
     it 'gives available spaces' do
       owner = User.create(name: 'Tester', email: 'test@gmail.com', password: 'password1234')
 
-      house = Space.create(owner: owner.id, name: 'Some house',
+      space = Space.create(owner: owner.id, name: 'Some house',
         description: 'Some house somewhere',
-        price: 100, from_date: '2020-12-25', to_date: '2020-12-31')
+        price: 100, from_date: '2020-12-20', to_date: '2020-12-31')
 
-      house1 = Space.create(owner: owner.id, name: 'Some house1',
-        description: 'Some house somewhere',
-        price: 100, from_date: '2020-12-20', to_date: '2020-12-29')
+      Space.create(owner: owner.id, name: 'Some house2',
+        description: 'Some house2 somewhere',
+        price: 100, from_date: '2020-12-25', to_date: '2020-12-29')
 
-      house2 = Space.create(owner: owner.id, name: 'Some house2',
-        description: 'Some house somewhere',
+      Space.create(owner: owner.id, name: 'Some house3',
+        description: 'Some house3 somewhere',
         price: 100, from_date: '2020-12-18', to_date: '2020-12-22')
 
-      request = Space.available(from_date: '2020-12-25', to_date: '2020-12-31')
-
-      expect(request.first.name).to eq "Some house"
+      expect(Space.available('2020-12-20', '2020-12-31').length).to eq 2
+      expect(Space.available('2020-12-25', '2020-12-31').first.name).to eq 'Some house2'
+      expect(Space.available('2020-12-20', '2020-12-31').first.name).not_to eq 'Some house3'
     end
   end
 end

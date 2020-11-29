@@ -14,5 +14,6 @@ feature 'Creating spaces' do
     fill_in :from, with: '2020-12-25'
     fill_in :to, with: '2020-12-31'
     click_button 'List my space'
+    expect(page).to have_content 'Book a space'
   end
 end

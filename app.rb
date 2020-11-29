@@ -33,36 +33,6 @@ class MakersBnB < Sinatra::Base
     end
   end
 
-  post '/spaces/available' do
-    session[:available] = Space.available(from_date: params[:from], to_date: params[:to])
-    redirect '/spaces'
-  end
-
-  get '/spaces/new' do
-    erb :'spaces/new'
-  end
-
-  post '/spaces' do
-    @space = Space.create(name: params[:name],
-      user_id: session[:user_id],
-      description: params[:description],
-      price: params[:price],
-      from_date: params[:from],
-      to_date: params[:to]
-    )
-    redirect '/spaces'
-  end
-
-  get '/spaces' do
-    @user = User.find(id: session[:user_id])
-    if session[:available] == nil
-      @spaces = Space.all
-    else
-      @spaces = session[:available]
-    end
-    erb :'spaces/list'
-  end
-
   get '/sessions/new' do
     erb :'sessions/new'
   end
@@ -81,7 +51,37 @@ class MakersBnB < Sinatra::Base
 
   post '/sessions/destroy' do
     session.clear
-    flash[:notice] = 'You have signed out.'
+    flash[:notice] = '>> You have signed out <<'
+    redirect '/'
+  end
+
+  get '/spaces' do
+    @user = User.find(id: session[:user_id])
+    if session[:available] == nil
+      @spaces = Space.all
+    else
+      @spaces = session[:available]
+    end
+    erb :'spaces/list'
+  end
+
+  post '/spaces/available' do
+    session[:available] = Space.available(from_date: params[:from_date], to_date: params[:to_date])
+    redirect '/spaces'
+  end
+
+  get '/spaces/new' do
+    erb :'spaces/new'
+  end
+
+  post '/spaces' do
+    @space = Space.create(owner: session[:user_id],
+      name: params[:name],
+      description: params[:description],
+      price: params[:price],
+      from_date: params[:from],
+      to_date: params[:to]
+    )
     redirect '/spaces'
   end
 
