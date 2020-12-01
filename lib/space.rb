@@ -37,15 +37,11 @@ class Space
     end
   end
 
-  def self.available(from_date, to_date)
-    if from_date == nil
+  def self.available(from_date:, to_date:)
+    if :from_date == nil
       result = DatabaseConnection.query("SELECT * FROM spaces;")
     else
-      result = DatabaseConnection.query(
-        "SELECT *
-         FROM spaces
-         WHERE from_date >= '#{from_date}'
-         AND to_date <= '#{to_date}';")
+      result = DatabaseConnection.query("SELECT * FROM spaces WHERE from_date >= '#{from_date}' AND to_date <= '#{to_date}';")
 
       result.map do |space|
         Space.new(id: space['id'], owner: space['owner'],

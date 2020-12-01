@@ -66,7 +66,7 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/spaces/available' do
-    session[:available] = Space.available(from_date: params[:from_date], to_date: params[:to_date])
+    session[:available] = Space.available(from_date: params[:from], to_date: params[:to])
     redirect '/spaces'
   end
 
@@ -90,7 +90,7 @@ class MakersBnB < Sinatra::Base
     erb :'booking/new'
   end
 
-  post '/spaces/booking' do
+  post '/spaces/:id/booking' do
     redirect '/spaces'
   end
 
