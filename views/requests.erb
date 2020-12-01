@@ -2,12 +2,12 @@
 
 <h1>Requests</h1>
 
-<ul >
-  <% @user.requests.each do |request|%>
-    <div  >
-      <h3  ><%= request['house'] %> from <%= request['name'] %> email: <%= request['email'] %> </h3>
-      <a href="">Confirm</a>
-      <a href="">Deny</a>
+<ul>
+  <% @requests.each do |request|%>
+    <div>
+      <h3><%= request.space_name %> from <%= request.name %> email: <%= request.email %> </h3>
+      <a class='button' href="">Confirm</a>
+      <a class='button' href="">Deny</a>
     </div>
   <%end%>
 </ul>
